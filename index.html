@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Ally 💙</title>
+    <link rel="icon" type="image/x-icon" href="assets/balloon.png">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            overflow-x: hidden;
+            text-align: center;
+
+            /* Soft safe blue gradient background */
+            background: linear-gradient(135deg, #9ecbff, #dbeeff);
+            background-attachment: fixed;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .message-container {
+            width: 100%;
+            max-width: 600px;
+            padding: 40px 20px;
+        }
+
+        .message {
+            opacity: 0;
+            font-size: 1.6rem;
+            transition: opacity 1.5s, transform 1.5s;
+            transform: translateY(30px);
+            color: #083c6d;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .message.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .message.exit {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+
+        .final-question {
+            display: none;
+            opacity: 0;
+            transition: opacity 2s;
+            margin-top: 40px;
+            color: #083c6d;
+            text-align: center;
+        }
+
+        .valentine-btn {
+            padding: 12px 24px;
+            border: none;
+            background: #518DFF;
+            color: white;
+            font-size: 1.2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 80%;
+            max-width: 260px;
+        }
+
+        .btn-group {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .no-btn {
+            background: #ff6b6b;
+            position: relative;
+        }
+
+        .celebration {
+            position: fixed;
+            pointer-events: none;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            overflow: hidden;
+        }
+
+        .love-particle, .heart-burst {
+            position: fixed;
+            font-size: 1.6rem;
+            animation: floatUp 6s linear forwards;
+        }
+
+        @keyframes floatUp {
+            from { transform: translateY(50px); opacity: 1; }
+            to { transform: translateY(-150vh); opacity: 0; }
+        }
+
+        /* ✅ Mobile friendly adjustments */
+        @media (max-width: 480px) {
+            .message {
+                font-size: 1.3rem;
+                padding: 0 10px;
+            }
+
+            .valentine-btn {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="message-container">
+
+        <div class="message">Hey Ally 💙</div>
+        <div class="message">Another year of your smile, your kindness, your light</div>
+        <div class="message">You make ordinary days feel special just by being you</div>
+        <div class="message">I hope today reminds you how loved you truly are</div>
+        <div class="message">Keep chasing your dreams and never lose that spark</div>
+        <div class="message">You deserve the softest days and the brightest skies</div>
+
+        <div class="final-question">
+            <h2>Happy Birthday, Ally 🎂</h2>
+            <p class="final-line">Can you click the button to move on another page?</p>
+
+            <div class="btn-group">
+                <button class="valentine-btn no-btn">Aww stop 😭</button>
+            </div>
+
+            <div style="margin-top:20px;">
+                <button class="valentine-btn yes-btn" onclick="window.location.href='ally.html'">
+                    Yes, thank you
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="celebration"></div>
+
+<script>
+  function createParticles() {
+    const emojis = ['❤️', '🌎', '🌠', '💝', '🌟', '💞'];
+    const container = document.body;
+    let lastTime = 0;
+
+    function animate(timestamp) {
+        if (!lastTime || timestamp - lastTime >= 500) {
+            const particle = document.createElement('div');
+            particle.className = 'love-particle';
+            particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = Math.random() * 3 + 3 + 's';
+            container.appendChild(particle);
+            setTimeout(() => particle.remove(), 6000);
+            lastTime = timestamp;
+        }
+        requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+}
+
+let currentMessage = 0;
+const messages = document.querySelectorAll('.message');
+const finalQuestion = document.querySelector('.final-question');
+
+function showNextMessage() {
+    requestAnimationFrame(() => {
+        if (currentMessage > 0) {
+            messages[currentMessage - 1].classList.add('exit');
+        }
+        if (currentMessage < messages.length) {
+            messages[currentMessage].classList.add('active');
+            currentMessage++;
+            setTimeout(showNextMessage, 3000);
+        } else {
+            finalQuestion.style.display = 'block';
+            finalQuestion.style.opacity = '1';
+        }
+    });
+}
+
+document.querySelector('.yes-btn').addEventListener('click', function() {
+    const celebration = document.querySelector('.celebration');
+    celebration.style.display = 'block';
+
+    requestAnimationFrame(() => {
+        for (let i = 0; i < 50; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'heart-burst';
+            heart.textContent = '❤️';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.top = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 0.5 + 's';
+            celebration.appendChild(heart);
+        }
+    });
+
+    finalQuestion.innerHTML = 
+        "<h2>🎉 I know you're my baby boo 💝</h2>" +
+        "<p>You've made my heart explode with joy!</p>" +
+        "<div style='margin-top: 2rem; font-size: 3rem'>💞🌟</div>";
+});
+
+document.querySelector('.no-btn').addEventListener('mouseover', function() {
+    requestAnimationFrame(() => {
+        this.style.transform = 
+            `translate(${Math.random() * 200 - 100}px, 
+            ${Math.random() * 200 - 100}px)
+            rotate(${Math.random() * 360}deg)`;
+        this.style.transition = 'all 0.5s';
+    });
+});
+
+createParticles();
+setTimeout(showNextMessage, 1000);
+</script>
+
+</body>
+</html>

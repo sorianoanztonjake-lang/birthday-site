@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Happy Birthday, Ally 💙</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Sacramento&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#e6f3ff;
+  --bg2:#d7ecff;
+  --accent:#3a86ff;
+  --navy:#123056;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Poppins',system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+  background:linear-gradient(180deg,var(--bg1),var(--bg2));
+  color:var(--navy);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.card{
+  width:100%;
+  max-width:820px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.75));
+  border-radius:18px;
+  padding:28px;
+  box-shadow:0 12px 40px rgba(18,48,86,0.12);
+  position:relative;
+  overflow:hidden;
+}
+.title{font-family:'Sacramento',cursive;font-size:48px;color:var(--accent);text-align:center;margin-bottom:6px;line-height:1;}
+.subtitle{text-align:center;color:#27507a;opacity:0.9;margin-bottom:18px;}
+.messages{min-height:180px;display:flex;align-items:center;justify-content:center;padding:18px;}
+.message{font-size:1.25rem;max-width:760px;text-align:center;color:#0b2b4a;opacity:0;transform:translateY(12px);transition:all 400ms cubic-bezier(.2,.9,.2,1);padding:0 12px;}
+.message.show{opacity:1;transform:translateY(0);}
+.final{margin-top:18px;padding:18px;border-radius:12px;background:linear-gradient(90deg, rgba(58,134,255,0.04), rgba(18,48,86,0.02));border:1px solid rgba(58,134,255,0.08);text-align:left;box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);}
+.final .letter{white-space:pre-line;line-height:1.55;font-size:1.05rem;max-height:400px;overflow-y:auto;}
+.controls{display:flex;gap:10px;justify-content:center;margin-top:16px;}
+.btn{padding:10px 18px;border-radius:999px;border:none;cursor:pointer;font-weight:600;background:var(--accent);color:white;box-shadow:0 6px 18px rgba(58,134,255,0.18);}
+.btn.ghost{background:transparent;color:var(--navy);border:1px solid rgba(18,48,86,0.08);box-shadow:none;}
+
+/* Polaroid mini-gallery */
+.mini-gallery {
+  margin-top:18px;
+  display:flex;
+  gap:15px;
+  justify-content:center;
+  flex-wrap:wrap;
+  perspective:1000px;
+}
+.mini-gallery .pic {
+  width:140px;
+  height:180px;
+  background:white;
+  padding:8px 8px 20px 8px; 
+  border-radius:8px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+  transform: rotate(var(--rotate,0deg));
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+}
+.mini-gallery .pic img {
+  width:100%;
+  height:auto;
+  object-fit:cover;
+  border-radius:4px;
+  display:block;
+}
+.mini-gallery .pic:hover{
+  transform: scale(1.08) rotate(0deg) translateY(-5px);
+  box-shadow:0 12px 25px rgba(0,0,0,0.25);
+}
+
+/* Confetti */
+.confetti {
+  position:fixed;
+  pointer-events:none;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+  z-index:9999;
+}
+
+/* Floating icons */
+.floating{position:absolute;pointer-events:none;inset:0;z-index:0;}
+.floating span{position:absolute;font-size:18px;opacity:0.12;animation: floatUp var(--dur,6s) linear infinite;}
+@keyframes floatUp{from{transform:translateY(0) translateX(0) scale(1);opacity:0.12;}to{transform:translateY(-420px) translateX(20px) scale(.8);opacity:0;}}
+
+.music-section{margin-top:30px;text-align:center;}
+.music-button{background:var(--accent);color:white;border:none;padding:10px 20px;margin:8px;border-radius:8px;cursor:pointer;font-size:16px;transition:0.3s;}
+.music-button:hover{background:#1565c0;}
+.youtube-player{width:100%;max-width:560px;height:315px;margin:10px auto;display:none;}
+
+/* Mobile adjustments */
+@media(max-width:520px){
+  .title{font-size:34px;}
+  .message{font-size:1rem;padding:0 8px;}
+  .mini-gallery .pic{width:100px;height:140px;}
+  .controls{flex-direction:column;gap:8px;}
+  .music-button{font-size:14px;padding:8px 16px;}
+}
+</style>
+</head>
+<body>
+<div class="card">
+  <div style="position:relative; z-index:2">
+    <div class="title">Happy Birthday, Ally 💙</div>
+    <div class="subtitle">a small corner of my heart — made for you</div>
+    
+    <!-- Messages -->
+    <div class="messages" aria-live="polite">
+      <div class="message show">Happy birthday, Ally — today is your day, shine like always.</div>
+      <div class="message">Every small laugh, every late-night talk — I keep them close.</div>
+      <div class="message">You make ordinary days feel gentle and golden.</div>
+      <div class="message">I hope this year gives you soft mornings and bold dreams.</div>
+      <div class="message">Thank you for your smile, your honesty.</div>
+      <div class="message">I picked these words one by one because they are true — for you.</div>
+    </div>
+    
+    <div class="controls">
+      <button class="btn" id="nextBtn">Next</button>
+      <button class="btn ghost" id="autoBtn">Auto Play Messages</button>
+    </div>
+    
+    <!-- Final Letter -->
+    <div class="final" id="finalBox" aria-hidden="true">
+      <div class="letter" id="letterText"></div>
+    </div>
+    
+    <!-- Polaroid Gallery -->
+    <div class="mini-gallery scrapbook" id="gallery">
+      <div class="pic" style="--rotate:-5deg;"><img src="https://i.ibb.co/5gS3LJ8H/ally1.jpg" alt="photo1"></div>
+      <div class="pic" style="--rotate:3deg;"><img src="https://i.ibb.co/xSDcx2KV/ally2.jpg" alt="photo2"></div>
+      <div class="pic" style="--rotate:-2deg;"><img src="https://i.ibb.co/PZZgxbHx/ally3.jpg" alt="photo3"></div>
+      <div class="pic" style="--rotate:4deg;"><img src="https://i.ibb.co/QF3jJVwV/ally4.jpg" alt="photo4"></div>
+    </div>
+    
+    <!-- Music Section -->
+    <div class="music-section">
+      <h2>Tap to Play Music 🎶</h2>
+      <button class="music-button" onclick="playVideo(0)">right where you left me - Taylor Swift</button>
+      <button class="music-button" onclick="playVideo(1)">Lifetime - Ben&Ben</button>
+      <button class="music-button" onclick="playVideo(2)">Pahintulot - Shirebound</button>
+      <button class="music-button" onclick="playVideo(3)">About you - The 1975</button>
+      <iframe id="video0" class="youtube-player" src="https://www.youtube.com/embed/04clUOh_1Jw?enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <iframe id="video1" class="youtube-player" src="https://www.youtube.com/embed/oxsY8GvoQQE?enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <iframe id="video2" class="youtube-player" src="https://www.youtube.com/embed/0g7aHsV_zzs?enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <iframe id="video3" class="youtube-player" src="https://www.youtube.com/embed/tGv7CUutzqU?enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+
+    <div style="text-align:center;margin-top:16px;color:#29527b;font-size:0.95rem;opacity:0.95">Made with 💙 — from Anzton</div>
+  </div>
+  
+  <!-- Floating icons -->
+  <div class="floating" aria-hidden="true">
+    <span style="left:8%; bottom:10%; --dur:7s">💙</span>
+    <span style="left:25%; bottom:6%; --dur:9s; font-size:22px">✨</span>
+    <span style="left:44%; bottom:8%; --dur:8s">💙</span>
+    <span style="left:68%; bottom:12%; --dur:6s">🌟</span>
+    <span style="left:86%; bottom:6%; --dur:10s">💙</span>
+  </div>
+</div>
+
+<div class="confetti" id="confetti"></div>
+
+<script>
+/* Messages */
+const messages = Array.from(document.querySelectorAll('.message'));
+let idx = 0;
+const nextBtn = document.getElementById('nextBtn');
+const autoBtn = document.getElementById('autoBtn');
+const finalBox = document.getElementById('finalBox');
+const letterTextEl = document.getElementById('letterText');
+
+function showMessage(i){
+  messages.forEach(m => m.classList.remove('show'));
+  if(i>=0 && i<messages.length) messages[i].classList.add('show');
+  if(i === messages.length-1){
+    setTimeout(()=>{ finalBox.classList.add('open'); finalBox.setAttribute('aria-hidden','false'); startTypewriter(); }, 650);
+  }
+}
+
+nextBtn.addEventListener('click', ()=>{ idx=Math.min(idx+1,messages.length-1); showMessage(idx); if(autoInterval){clearInterval(autoInterval);autoInterval=null;autoBtn.textContent='Auto Play Messages';} });
+let autoInterval=null;
+autoBtn.addEventListener('click', ()=>{ if(autoInterval){clearInterval(autoInterval);autoInterval=null;autoBtn.textContent='Auto Play Messages';} else{ idx=0; showMessage(idx); autoBtn.textContent='Stop Auto'; autoInterval=setInterval(()=>{ idx++; if(idx<messages.length) showMessage(idx); else{ clearInterval(autoInterval); autoInterval=null; autoBtn.textContent='Auto Play Messages'; } },1800); } });
+window.addEventListener('load', ()=>{ showMessage(0); startConfetti(); });
+
+/* Typewriter */
+let typed = false;
+const fullLetter = `Hello Ally, today is your special day and I'm here to remind you that I'm still here...
+Do you still remember the time you said I might not greet you on your birthday because I already greeted you?
+I created this website para iparating ang message ko in a unique way hope you appreciate this,It's been a month since we last talked,
+I hope you don't feel like I'm not around because I'm always here.
+I’m really glad I met you. I hope your day is filled with smiles, peace, and all the little things you love.
+ I don’t say this often, but you’re someone I’m really grateful for. You matter a lot to me.
+i didn't fall for you because i needed a relationship.i fell for you because the first time,in such a long time,i felt love like i was home.i fell
+for you smile,the way you made my heart smile.
+Happy Birthday, Ally
+I wish that this year brings you closer to the things you’ve been quietly praying for. I hope you feel loved, supported, and appreciated because you truly are.
+May He protect your heart, calm your mind, and lead you to the things meant for you.
+I hope God guides you always and leads your steps in the right direction.May he keep you safe from the danger, surrond you with peace,and bless your heart with joy.
+I pray that he gives you strength in the time of weakness,health to carry you through each day,and endless reasons to be grateful.
+May your life be filled with love and peace that no one can take away.
+im proud of you for winning silent battles im proud of you waking up im proud of you being strong,being present for others,
+doing a good job and im proud of you not giving up.im proud of you,God does too.
+no matter how busy you are,don't forget to rest well,eat well.
+uhm...nag message din kasi gusto ko ng i-express yung nararamdaman ko after ng nangyari
+na kung wala tayong communication baka mas maging okay but yung nararamdaman ko is kabaliktaran mas nasasaktan ako at tbh i really miss you.
+I just don't have the courage to reach out to you because I don't want to disturb your peace and I hope you're happy with the days that have passed without me.
+but i'm still here stuck somewhere between healing and hoping.i can't accept that we're not talking to each other anymore like we use to do before.
+Just because i'm no longer chasing you doesn't mean i've given up on you.I just want to respect your decision and to see you happy.
+tbh,i'm just keeping myself busy with a lot of things,but whenever i stop,i always found myself thinking and missing you.
+I still check my phone as soon as i wake up,hoping there's a message from you,
+You still live in the spaces of my heart,a part of me still wishes you were here by my side.
+I try so hard to not think about you but just i can't,I tried so hard not to bother you again but this heart doesn't want to.
+keeping you in my prayers is the only way my love can still reach u
+i know i could move on,but a part of me doesn't want to.
+You were never mine but i loved you like you were.
+ missing your small update,your goodmorning and goodnight,our night jokes,your voice,i miss everything about you.
+remember that i care about you.remember that i'm here for you.
+I left the book open, just in case you still want to continue our story.`;
+
+function typeLetter(text, el){
+  let i = 0;
+  const interval = setInterval(()=>{ el.textContent += text[i]; i++; if(i>=text.length) clearInterval(interval); },15);
+}
+function startTypewriter(){ if(!typed){ typed = true; typeLetter(fullLetter, letterTextEl); } }
+
+/* Music Players */
+const players=[document.getElementById('video0'),document.getElementById('video1'),document.getElementById('video2'),document.getElementById('video3')];
+function playVideo(index){ players.forEach((vid,i)=>{ vid.style.display=(i===index)?'block':'none'; }); }
+
+/* Gallery click */
+const gallery=document.getElementById('gallery');
+gallery.addEventListener('click',e=>{ if(e.target.tagName==='IMG'){ window.open(e.target.src,'_blank'); } });
+
+/* Confetti */
+function startConfetti(){
+  const confettiContainer = document.getElementById('confetti');
+  for(let i=0;i<100;i++){
+    const c = document.createElement('div');
+    c.style.position='absolute';
+    c.style.width='8px';
+    c.style.height='8px';
+    c.style.backgroundColor=`hsl(${Math.random()*360}, 70%, 60%)`;
+    c.style.left=Math.random()*window.innerWidth+'px';
+    c.style.top=Math.random()*window.innerHeight+'px';
+    c.style.opacity=Math.random();
+    c.style.borderRadius='50%';
+    c.style.transform=`translateY(0)`;
+    c.style.animation=`fall ${2+Math.random()*3}s linear infinite`;
+    confettiContainer.appendChild(c);
+  }
+}
+const style = document.createElement('style');
+style.innerHTML = `@keyframes fall{0%{transform:translateY(0);}100%{transform:translateY(100vh);}}`;
+document.head.appendChild(style);
+</script>
+</body>
+</html>
